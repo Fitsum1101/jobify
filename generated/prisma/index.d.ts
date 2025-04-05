@@ -38,7 +38,8 @@ export namespace $Enums {
   PART_TIME: 'PART_TIME',
   CONTRACT: 'CONTRACT',
   INTERNSHIP: 'INTERNSHIP',
-  TEMPROARY: 'TEMPROARY'
+  TEMPROARY: 'TEMPROARY',
+  NEW: 'NEW'
 };
 
 export type Jobtype = (typeof Jobtype)[keyof typeof Jobtype]

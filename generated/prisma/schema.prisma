@@ -50,6 +50,7 @@ enum Jobtype {
   CONTRACT
   INTERNSHIP
   TEMPROARY
+  NEW
 }
 
 enum Role {

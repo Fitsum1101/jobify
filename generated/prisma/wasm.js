@@ -183,7 +183,8 @@ exports.Jobtype = exports.$Enums.Jobtype = {
   PART_TIME: 'PART_TIME',
   CONTRACT: 'CONTRACT',
   INTERNSHIP: 'INTERNSHIP',
-  TEMPROARY: 'TEMPROARY'
+  TEMPROARY: 'TEMPROARY',
+  NEW: 'NEW'
 };
 
 exports.Prisma.ModelName = {
