@@ -1,7 +1,8 @@
-import express from "express";
+const express = require("express");
 
-import admiRoute from "./routes/admin.js";
-import { PrismaClient } from "@prisma/client";
+const admiRoute = require("./routes/admin");
+
+const { PrismaClient } = require("@prisma/client");
 
 const app = express();
 

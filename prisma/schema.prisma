@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output = "../generated/prisma"
 }
 
 datasource db {
@@ -51,7 +50,6 @@ enum Jobtype{
   CONTRACT
   INTERNSHIP
   TEMPROARY
-  NEW
 }
 
 enum Role{
