@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require("multer");
 
 const db = require("../config/db");
+const imageDelete = require("../util/file");
 
 const router = express.Router();
 
@@ -59,6 +60,27 @@ router.post("/company", upload.single("file"), async (req, res, next) => {
   } catch (error) {
     console.log(error);
   }
+});
+
+router.delete("/company/delete/:id", async (req, res, next) => {
+  const id = +req.params.id;
+  const companeyExist = await db.companey.findFirst({
+    where: {
+      id,
+    },
+  });
+  if (!companeyExist) {
+    return res.status(404).json({
+      message: "companey does not exists",
+    });
+  }
+  const companeyDeleted = await db.companey.delete({
+    where: {
+      id,
+    },
+  });
+  await imageDelete(companeyExist.logo);
+  return res.status(200).json({ companeyDeleted });
 });
 
 module.exports = router;
