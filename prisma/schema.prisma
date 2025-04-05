@@ -24,6 +24,7 @@ model User{
   updated_at DateTime @updatedAt
 }
 
+
 model Companey{
   id Int @id @default(autoincrement())
   name String @unique
@@ -50,6 +51,7 @@ enum Jobtype{
   CONTRACT
   INTERNSHIP
   TEMPROARY
+  NEW
 }
 
 enum Role{
