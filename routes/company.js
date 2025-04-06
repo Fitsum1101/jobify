@@ -38,6 +38,7 @@ const upload = multer({
 });
 
 router.get("/company", async (req, res, next) => {
+  // pagenation implementing 5 companey per pages
   try {
     const page = req.query.page ? +req.query.page : 1;
     const take = pageSize;
@@ -121,7 +122,6 @@ router.patch(
   async (req, res, next) => {
     const id = +req.params.id;
     const { name } = req.body;
-    console.log(req.file);
     const file = req.file ? req.file : undefined;
     const companeyExist = await db.companey.findFirst({
       where: {
