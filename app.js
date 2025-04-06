@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const admiRoute = require("./routes/admin");
 const companyRoute = require("./routes/company");
 
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
