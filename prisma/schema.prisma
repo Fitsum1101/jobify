@@ -18,7 +18,7 @@ model User{
   username String @unique
   password String
   email String @unique
-  role Role @default(ADMIN)
+  role Role @default(USER)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 }
@@ -55,4 +55,5 @@ enum Jobtype{
 enum Role{
   SUPER_ADMIN
   ADMIN
+  USER
 }
