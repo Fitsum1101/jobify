@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require("multer");
 
 const db = require("../config/db");
+const openAi = require("../config/ai");
 
 const router = express.Router();
 
@@ -34,6 +35,22 @@ router.post(
   async (req, res) => {
     try {
       const companeyName = req.params.name;
+      const jobData = { ...req.body };
+      const pdfFile = req.file;
+      const companyExist = await db.companey.findFirst({
+        where: {
+          name: companeyName,
+        },
+      });
+      if (!companyExist) {
+        return res.status(404).json({
+          msg: "not Founded",
+        });
+      }
+      if (pdfFile) {
+        jobData["descFile"] = req.file.path;
+      }
+      
     } catch (error) {
       next(error);
     }

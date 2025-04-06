@@ -3,7 +3,8 @@ const bodyParser = require("body-parser");
 
 const admiRoute = require("./routes/admin");
 const companyRoute = require("./routes/company");
-
+const jobsRoute = require("./routes/jobs");
+const openAi = require("./config/ai");
 
 const app = express();
 
@@ -12,6 +13,8 @@ app.use(bodyParser.json());
 
 app.use(admiRoute);
 app.use(companyRoute);
+app.use(jobsRoute);
+
 app.use((err, req, res, next) => {
   res.status(500).json({
     message: err.message,
