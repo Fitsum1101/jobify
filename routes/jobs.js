@@ -2,7 +2,7 @@ const express = require("express");
 const multer = require("multer");
 
 const db = require("../config/db");
-const openAi = require("../config/ai");
+// const 
 
 const router = express.Router();
 
@@ -50,10 +50,33 @@ router.post(
       if (pdfFile) {
         jobData["descFile"] = req.file.path;
       }
+
+      const questionData = `Write me job description for this java script object data that it have all data you need for generating the description info ${jobData} `;
+
+
+
     } catch (error) {
       next(error);
     }
   }
 );
+
+// router.patch(
+//   "/company/:name/jobs/edit/:id",
+//   uploadPdf.single("pdf"),
+//   async (req, res, next) => {
+//     const companeyName = req.params.name;
+//     const datas = { ...req.body };
+//     const file = req.file;
+//     if (file) {
+//       //  update the file that exists
+//     }
+//     const jobExists = await db.job.findUnique({
+//       where: {
+//         title: companeyName,
+//       },
+//     });
+//   }
+// );
 
 module.exports = router;
