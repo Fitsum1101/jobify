@@ -50,7 +50,6 @@ router.post(
       if (pdfFile) {
         jobData["descFile"] = req.file.path;
       }
-      
     } catch (error) {
       next(error);
     }
