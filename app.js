@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const admiRoute = require("./routes/admin");
 const companyRoute = require("./routes/company");
 const jobsRoute = require("./routes/jobs");
-// const openAi = require("./config/ai");
 
 const app = express();
 
