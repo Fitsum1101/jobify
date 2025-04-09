@@ -45,6 +45,7 @@ router.delete(
   jobContollers.deleteCompanyJobs
 );
 
+
 // filter by using jobtitle,salary and location
 router.get("/company/jobs/", jobContollers.getCompanyJobs);
 
