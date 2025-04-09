@@ -2,6 +2,8 @@ const express = require("express");
 const multer = require("multer");
 
 const companyController = require("../controllers/company");
+const authtication = require("../middleware/authticationJWT");
+const authorize = require("../middleware/permission");
 
 const router = express.Router();
 
@@ -34,17 +36,40 @@ const upload = multer({
   limits: { fileSize: 1024 * 1024 * 5 },
 });
 
-router.get("/company", companyController.getCompany);
+router.get(
+  "/company",
+  authtication.authticatioToken,
+  authorize.authorizeRole("ADMIN"),
+  companyController.getCompany
+);
 
-router.get("/company/search", companyController.searchCompany);
+router.get(
+  "/company/search",
+  authtication.authticatioToken,
+  authorize.authorizeRole("ADMIN"),
+  companyController.searchCompany
+);
 
-router.post("/company", upload.single("file"), companyController.postCompany);
+router.post(
+  "/company",
+  upload.single("file"),
+  authtication.authticatioToken,
+  authorize.authorizeRole("ADMIN"),
+  companyController.postCompany
+);
 
-router.delete("/company/delete/:id", companyController.deleteCompany);
+router.delete(
+  "/company/delete/:id",
+  authtication.authticatioToken,
+  authorize.authorizeRole("ADMIN"),
+  companyController.deleteCompany
+);
 
 router.patch(
   "/company/edit/:id",
   upload.single("file"),
+  authtication.authticatioToken,
+  authorize.authorizeRole("ADMIN"),
   companyController.editCompany
 );
 

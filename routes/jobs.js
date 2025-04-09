@@ -2,6 +2,8 @@ const express = require("express");
 const multer = require("multer");
 
 const jobContollers = require("../controllers/jobs");
+const authtication = require("../middleware/authticationJWT");
+const authorize = require("../middleware/permission");
 
 const router = express.Router();
 
@@ -31,22 +33,32 @@ const uploadPdf = multer({
 router.post(
   "/company/:name/jobs",
   uploadPdf.single("pdf"),
+  authtication.authticatioToken,
+  authorize.authorizeRole("ADMIN"),
   jobContollers.postJobs
 );
 
 router.patch(
   "/company/:name/jobs/edit/:id",
   uploadPdf.single("pdf"),
+  authtication.authticatioToken,
+  authorize.authorizeRole("ADMIN"),
   jobContollers.editCompanyJobs
 );
 
 router.delete(
   "/company/:name/jobs/delete/:id",
+  authtication.authticatioToken,
+  authorize.authorizeRole("ADMIN"),
   jobContollers.deleteCompanyJobs
 );
 
-
 // filter by using jobtitle,salary and location
-router.get("/company/jobs/", jobContollers.getCompanyJobs);
+router.get(
+  "/company/jobs/",
+  authtication.authticatioToken,
+  authorize.authorizeRole("ADMIN"),
+  jobContollers.getCompanyJobs
+);
 
 module.exports = router;
