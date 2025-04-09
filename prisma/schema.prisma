@@ -36,7 +36,7 @@ id Int @id @default(autoincrement())
 title String
 requirments String
 location String
-description String
+description String @db.VarChar(500)
 descFile String?
 salary Int
 jobtype Jobtype @default(FULL_TIME)
