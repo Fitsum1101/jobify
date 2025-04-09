@@ -1,4 +1,5 @@
 const db = require("../config/db");
+const bcrypt = require("bcrypt");
 
 exports.postAdmin = async (req, res, next) => {
   try {
@@ -19,6 +20,7 @@ exports.postAdmin = async (req, res, next) => {
         username,
         email,
         password: bcryptPassword,
+        role: "ADMIN",
       },
     });
     return res.status(201).json({ newAdmin });
