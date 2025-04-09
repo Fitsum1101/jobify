@@ -1,6 +1,6 @@
 const db = require("../config/db");
 
-export const postAdmin = async (req, res, next) => {
+exports.postAdmin = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
     const adminExist = await db.user.findFirst({
@@ -27,7 +27,7 @@ export const postAdmin = async (req, res, next) => {
   }
 };
 
-export const patchEditAdmin = async (req, res, next) => {
+exports.patchEditAdmin = async (req, res, next) => {
   const id = +req.params.id;
   const { email, username, password } = req.body;
   const adminExist = await db.user.findUnique({
@@ -68,7 +68,7 @@ export const patchEditAdmin = async (req, res, next) => {
   });
 };
 
-export const deleteAdimn = async (req, res, next) => {
+exports.deleteAdimn = async (req, res, next) => {
   try {
     const id = req.body.id;
     const adminExists = await db.user.findUnique({
