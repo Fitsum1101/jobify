@@ -73,11 +73,15 @@ exports.deleteCompany = async (req, res, next) => {
       message: "companey does not exists",
     });
   }
-  const companeyDeleted = await db.companey.delete({
-    where: {
-      id,
-    },
-  });
+  // const companeyDeleted = await db.companey.delete({
+  //   where: {
+  //     id,
+  //   },
+  // });
+  const companeyDeleted = await db.$transaction([
+    db.job.deleteMany({ where: { companey_id: companeyExist.id } }),
+    db.companey.delete({ where: { id } }),
+  ]);
   await imageDelete(companeyExist.logo);
   return res.status(200).json({ companeyDeleted });
 };
