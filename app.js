@@ -9,7 +9,6 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// route 
 app.use(admiRoute);
 app.use(companyRoute);
 app.use(jobsRoute);
