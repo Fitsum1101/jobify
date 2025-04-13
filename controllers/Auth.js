@@ -20,3 +20,22 @@ exports.postLogin = async (req, res, next) => {
     token,
   });
 };
+
+exports.postSignup = async (req, res, next) => {
+  try {
+    const { username, password, email } = req.body;
+    const hasedPassword = await bcrypt.hash(password, 12);
+    const newUser = await db.user.create({
+      data: {
+        email,
+        username,
+        password: hasedPassword,
+      },
+    });
+    res.status(201).json({
+      user: newUser,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
