@@ -4,6 +4,7 @@ const multer = require("multer");
 const companyController = require("../controllers/company");
 const authtication = require("../middleware/authticationJWT");
 const authorize = require("../middleware/permission");
+const adminCompany = require("../middleware/Admincompany");
 
 const router = express.Router();
 
@@ -61,6 +62,7 @@ router.post(
 router.delete(
   "/company/delete/:id",
   authtication.authticatioToken,
+  adminCompany(),
   authorize.authorizeRole("ADMIN"),
   companyController.deleteCompany
 );
@@ -70,6 +72,7 @@ router.patch(
   upload.single("file"),
   authtication.authticatioToken,
   authorize.authorizeRole("ADMIN"),
+  adminCompany(),
   companyController.editCompany
 );
 
