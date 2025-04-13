@@ -35,6 +35,7 @@ router.post(
   uploadPdf.single("pdf"),
   authtication.authticatioToken,
   authorize.authorizeRole("ADMIN"),
+  adminCompany(),
   jobContollers.postJobs
 );
 
@@ -43,6 +44,7 @@ router.patch(
   uploadPdf.single("pdf"),
   authtication.authticatioToken,
   authorize.authorizeRole("ADMIN"),
+  adminCompany(),
   jobContollers.editCompanyJobs
 );
 
@@ -50,6 +52,7 @@ router.delete(
   "/company/:name/jobs/delete/:id",
   authtication.authticatioToken,
   authorize.authorizeRole("ADMIN"),
+  adminCompany(),
   jobContollers.deleteCompanyJobs
 );
 
@@ -60,5 +63,6 @@ router.get(
   authorize.authorizeRole("ADMIN"),
   jobContollers.getCompanyJobs
 );
+
 
 module.exports = router;
