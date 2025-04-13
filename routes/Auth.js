@@ -51,4 +51,44 @@ router.post(
   authController.postLogin
 );
 
+router.post(
+  "/signin",
+  [
+    body("username")
+      .trim()
+      .notEmpty()
+      .withMessage("Invalid username")
+      .custom(async (username, { req }) => {
+        const isUserNameEist = await db.user.findUnique({
+          where: {
+            username,
+          },
+        });
+        if (isUserNameEist) {
+          return Promise.reject("username aleady exists");
+        }
+      }),
+    body("password")
+      .trim()
+      .isLength({ min: 5, max: 7 })
+      .withMessage("Password needs to be between 5 and 7"),
+    body("email")
+      .trim()
+      .notEmpty()
+      .withMessage("Invalid email")
+      .normalizeEmail()
+      .custom(async (email) => {
+        const isEmailExists = await db.user.findUnique({
+          where: {
+            email,
+          },
+        });
+        if (isEmailExists) {
+          return Promise.reject("Email aleady in use");
+        }
+      }),
+  ],
+  authController.postSignup
+);
+
 module.exports = router;
