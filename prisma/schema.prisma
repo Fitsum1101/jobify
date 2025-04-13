@@ -19,16 +19,21 @@ model User{
   password String
   email String @unique
   role Role @default(USER)
+  company Companey[]
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
-}
 
+}
 
 model Companey{
   id Int @id @default(autoincrement())
   name String @unique
-  logo String
+  logo_url String 
+  user User? @relation(fields: [admin_id],references: [id])
+  admin_id Int?
   jobs Job[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
 
 model Job{
@@ -42,7 +47,11 @@ salary Int
 jobtype Jobtype @default(FULL_TIME)
 Companey Companey @relation(fields: [companey_id] ,references: [id])
 companey_id Int 
+created_at DateTime @default(now())
+updated_at DateTime @updatedAt
 }
+
+
 
 enum Jobtype{
   FULL_TIME
