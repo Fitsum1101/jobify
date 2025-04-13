@@ -94,16 +94,15 @@ exports.deleteCompanyJobs = async (req, res, next) => {
 
 exports.getCompanyJobs = async (req, res, next) => {
   const { title, salary, location } = req.query;
-  console.log(title, salary, location);
   let filterMethod = {};
   if (title) {
-    filterMethod = { title };
+    filterMethod.title = title;
   }
   if (salary) {
-    filterMethod = { salary: +salary };
+    filterMethod.salary = salary;
   }
   if (location) {
-    filterMethod = { location };
+    filterMethod.location = location;
   }
   const jobs = await db.job.findMany({
     where: { ...filterMethod },
